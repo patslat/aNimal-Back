@@ -12,9 +12,21 @@
  *= require_tree .
  */
 
-
 .block {
-  height: 50px;
+  height: 150px;
+  margin-top: 20px;
   background-color: #CCC;
-  border: 5px solid;
+  border: 1px solid;
+}
+  .light {
+    background-color: #33CCCC;
+  }
+  .center {
+    visibility: hidden;
+  }
+
+.indicator {
+  margin-top: 20px;
+  height: 150px;
+  border: 1px solid;
 }

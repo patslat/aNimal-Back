@@ -4,7 +4,8 @@ window.Nback = {
   Views: {},
   Routers: {},
   initialize: function($rootEl) {
-    new Nback.routers.Nbacks($rootEl);
+    new Nback.Routers.Nbacks($rootEl);
+    Backbone.history.start();
   }
 };
 

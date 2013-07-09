@@ -1,5 +1,5 @@
 Nback.Collections.Nbacks = Backbone.Collection.extend({
 
-  model: Nback.Models.Nback
+  model: Nback.Models.Nback,
 
 });

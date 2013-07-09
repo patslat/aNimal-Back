@@ -8,7 +8,7 @@ Nback.Routers.Nbacks = Backbone.Router.extend({
   },
 
   index: function () {
-    var view = new Nbacks.Views.NbacksIndex();
+    var view = new Nback.Views.NbacksIndex();
     this.$rootEl.html(view.render().$el);
   }
 
