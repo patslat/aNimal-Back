@@ -16,10 +16,11 @@ Nback.Models.Nback = Backbone.Model.extend({
   _generateSequences: function () {
     this.sequences = [];
     var blocks = [];
-    var sounds = ["A", "B", "C", "D", "E", "F", "G", "H"];
+    //var sounds = ["A", "B", "C", "D", "E", "F", "G", "H"];
+    var sounds = ["A", "B", "C", "D", "E", "F"];
     for (var i = 0; i < 20; i++) {
       var block = Math.floor(Math.random() * 8);
-      var sound = sounds[Math.floor(Math.random() * 8)];
+      var sound = sounds[Math.floor(Math.random() * sounds.length)];
 
       this.sequences.push([block, sound]);
     }
@@ -29,10 +30,10 @@ Nback.Models.Nback = Backbone.Model.extend({
     var correct = this._getCorrectInput(i);
     var response = this.currentResponse;
 
-    console.log("END OF PASS THIS IS THE CORRECT")
-    console.log(correct)
-    console.log("this is what you said")
-    console.log(response)
+    // console.log("END OF PASS THIS IS THE CORRECT")
+    // console.log(correct)
+    // console.log("this is what you said")
+    // console.log(response)
 
     this.accuracy.push(
       (correct[0] === response[0]) && (correct[1] === response[1])
@@ -42,11 +43,11 @@ Nback.Models.Nback = Backbone.Model.extend({
   },
 
   wonRound: function () {
-    console.log("END OF ROUND THIS IS THE ACCURACY")
-    console.log(this.getAccuracy())
-    console.log("by pass")
-    console.log(this.accuracy)
-    return (this.getAccuracy() > .75);
+    // console.log("END OF ROUND THIS IS THE ACCURACY")
+    // console.log(this.getAccuracy())
+    // console.log("by pass")
+    // console.log(this.accuracy)
+    return (this.getAccuracy() > .8);
   },
 
   getAccuracy: function () {

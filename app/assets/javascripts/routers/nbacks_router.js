@@ -4,11 +4,17 @@ Nback.Routers.Nbacks = Backbone.Router.extend({
   },
 
   routes: {
-    "": "index"
+    "": "index",
+    "instructions": "instructions"
   },
 
   index: function () {
     var view = new Nback.Views.NbacksIndex();
+    this.$rootEl.html(view.render().$el);
+  },
+
+  instructions: function () {
+    var view = new Nback.Views.NbacksInstructions();
     this.$rootEl.html(view.render().$el);
   }
 

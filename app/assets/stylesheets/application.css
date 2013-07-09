@@ -12,6 +12,10 @@
  *= require_tree .
  */
 
+#body {
+  background-color: #EFEFEF;
+}
+
 .block {
   height: 150px;
   margin-top: 20px;
@@ -22,20 +26,30 @@
     background-color: #33CCCC;
   }
   .center {
-    background-color: #FFFFFF;
+    background-color: #EFEFEF;
   }
 
 .indicator {
   margin-top: 20px;
   height: 150px;
   border: 1px solid;
+  border-radius: 5px;
 }
 
 .icon {
-  margin: 55px 40%;
+  margin: 55px 33%;
+  transform:scale(2.0,2.0);
+  -ms-transform:scale(2.0,2.0); /* IE 9 */
+  -moz-transform:scale(2.0,2.0); /* Firefox */
+  -webkit-transform:scale(2.0,2.0); /* Safari and Chrome */
+  -o-transform:scale(2.0,2.0); /* Opera */
 }
 
 #status {
   margin-top: 25%;
   text-align: center;
+}
+
+#control-panel {
+  margin: 20px;
 }

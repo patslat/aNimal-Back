@@ -7,7 +7,7 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
   template: JST['nbacks/index'],
 
   events: {
-    "click #start": "play",
+    "click #start": "play"
   },
 
   render: function () {
@@ -38,7 +38,7 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
       // light and sound off
       setTimeout(function () {
         $("#block-" + block).toggleClass("light");
-      }, 3000)
+      }, 2000)
 
       // time where input still allowed
       setTimeout(function () {
@@ -50,23 +50,28 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
           gameLoop(i)
         } else {
           if (self.game.wonRound()) {
-            console.log("YOU WON")
             self.game.n += 1;
             self._renderStatus();
           } else {
             self.game.n = 1;
             self._renderStatus();
           }
+          self._showAccuracy();
         }
-      }, 5000)
+      }, 3000)
 
     })(this.game.sequences.length);
   },
 
   _renderStatus: function () {
-    var self = this;
     var status = "<h1>N = " + this.game.n + "</h1>";
     $(this.$el.find("#status")).html(status);
+  },
+
+  _showAccuracy: function () {
+    var accuracy = "<span>Accuracy Last Round: " +
+      this.game.getAccuracy() + "</span>";
+    $(this.$el.find("#status")).append(accuracy);
   },
 
   _bindInputs: function () {
