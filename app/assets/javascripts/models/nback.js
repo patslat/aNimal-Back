@@ -1,12 +1,22 @@
 Nback.Models.Nback = Backbone.Model.extend({
 
   initialize: function () {
+    this.n = 0;
     this.sequences = [];
     this.currentResponse = [false, false];
     this.accuracy = [];
   },
 
-  generateSequences: function () {
+  startRound: function (n) {
+    this.n += 1;
+    console.log("STARTING")
+    console.log(this.n)
+    this._generateSequences();
+    this.accuracy = [];
+    this.currentResponse = [false, false];
+  },
+
+  _generateSequences: function () {
     this.sequences = [];
     var blocks = [];
     var sounds = ["A", "B", "C", "D", "E", "F", "G", "H"];
@@ -31,6 +41,9 @@ Nback.Models.Nback = Backbone.Model.extend({
       _(this.accuracy).select(function (acc) {
         if (acc) return acc;
       }).length;
+      console.log("ACCURACY")
+      console.log(accuracy)
+      console.log(this.sequences.length)
 
     return (accuracy / this.sequences.length > .75);
   },

@@ -16,10 +16,9 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
     return this;
   },
 
-  play: function (n) {
+  play: function () {
     var self = this
-    this.game.n = n || 1
-    this.game.generateSequences();
+    this.game.startRound();
 
     (function gameLoop (i) {
       self.game.response = [false, false];
@@ -32,7 +31,7 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
       setTimeout(function () {
         $.playSound("sounds/" + sound + ".mp3");
         $("#block-" + block).toggleClass("light");
-      }, 1000)
+      }, 10)
       setTimeout(function () {
         $("#block-" + block).toggleClass("light");
         self._unbindInputs();
@@ -46,10 +45,10 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
             console.log("Winner Winner Chicken Dinner");
             self.play(n + 1);
           } else {
-            console.log("You lost at n = " + this.game.n);
+            console.log("You lost at n = " + self.game.n);
           }
         }
-      }, 2000)
+      }, 60)
 
     })(this.game.sequences.length);
   },
