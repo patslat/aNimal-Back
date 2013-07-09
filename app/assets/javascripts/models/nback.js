@@ -1,16 +1,13 @@
 Nback.Models.Nback = Backbone.Model.extend({
 
   initialize: function () {
-    this.n = 0;
+    this.n = 1;
     this.sequences = [];
     this.currentResponse = [false, false];
     this.accuracy = [];
   },
 
   startRound: function (n) {
-    this.n += 1;
-    console.log("STARTING")
-    console.log(this.n)
     this._generateSequences();
     this.accuracy = [];
     this.currentResponse = [false, false];
@@ -31,21 +28,34 @@ Nback.Models.Nback = Backbone.Model.extend({
   endPass: function (i) {
     var correct = this._getCorrectInput(i);
     var response = this.currentResponse;
+
+    console.log("END OF PASS THIS IS THE CORRECT")
+    console.log(correct)
+    console.log("this is what you said")
+    console.log(response)
+
     this.accuracy.push(
       (correct[0] === response[0]) && (correct[1] === response[1])
     )
+
+    this.currentResponse = [false, false]
   },
 
   wonRound: function () {
+    console.log("END OF ROUND THIS IS THE ACCURACY")
+    console.log(this.getAccuracy())
+    console.log("by pass")
+    console.log(this.accuracy)
+    return (this.getAccuracy() > .75);
+  },
+
+  getAccuracy: function () {
     var accuracy =
       _(this.accuracy).select(function (acc) {
         if (acc) return acc;
       }).length;
-      console.log("ACCURACY")
-      console.log(accuracy)
-      console.log(this.sequences.length)
 
-    return (accuracy / this.sequences.length > .75);
+    return (accuracy / this.sequences.length);
   },
 
   _getCorrectInput: function (i) {
@@ -55,11 +65,14 @@ Nback.Models.Nback = Backbone.Model.extend({
 
       var nbackVisual = this.sequences[i + this.n][0];
       var nbackAuditory = this.sequences[i + this.n][1];
+      return [
+        (currentVisual === nbackVisual),
+        (currentAuditory === nbackAuditory)
+      ];
+    } else {
+      return [false, false];
     }
-    return [
-      (currentVisual === nbackVisual),
-      (currentAuditory === nbackAuditory)
-    ];
+
 
   }
 

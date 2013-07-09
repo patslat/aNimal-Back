@@ -12,13 +12,15 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
 
   render: function () {
     this.$el.html(this.template());
-
+    this._renderStatus();
     return this;
   },
 
   play: function () {
     var self = this
+
     this.game.startRound();
+
 
     (function gameLoop (i) {
       self.game.response = [false, false];
@@ -27,13 +29,19 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
 
       var block = self.game.sequences[i - 1][0];
       var sound = self.game.sequences[i - 1][1];
-
+      // light and sound on
       setTimeout(function () {
         $.playSound("sounds/" + sound + ".mp3");
         $("#block-" + block).toggleClass("light");
-      }, 10)
+      }, 1000)
+
+      // light and sound off
       setTimeout(function () {
         $("#block-" + block).toggleClass("light");
+      }, 3000)
+
+      // time where input still allowed
+      setTimeout(function () {
         self._unbindInputs();
 
         self.game.endPass(i - 1)
@@ -42,15 +50,23 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
           gameLoop(i)
         } else {
           if (self.game.wonRound()) {
-            console.log("Winner Winner Chicken Dinner");
-            self.play(n + 1);
+            console.log("YOU WON")
+            self.game.n += 1;
+            self._renderStatus();
           } else {
-            console.log("You lost at n = " + self.game.n);
+            self.game.n = 1;
+            self._renderStatus();
           }
         }
-      }, 60)
+      }, 5000)
 
     })(this.game.sequences.length);
+  },
+
+  _renderStatus: function () {
+    var self = this;
+    var status = "<h1>N = " + this.game.n + "</h1>";
+    $(this.$el.find("#status")).html(status);
   },
 
   _bindInputs: function () {
@@ -68,12 +84,12 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
   },
 
   _giveFeedback: function (key) {
-    // auditory === 97; visual === 108
+    // visual === 97; auditory === 108
     if (key === 97) {
-      this.game.currentResponse[1] = true;
+      this.game.currentResponse[0] = true;
       this._indicate($("#location-indicator"));
     } else if (key === 108) {
-      this.game.currentResponse[0] = true;
+      this.game.currentResponse[1] = true;
       this._indicate($("#auditory-indicator"));
     }
   },

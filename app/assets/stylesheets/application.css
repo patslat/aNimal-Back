@@ -22,11 +22,20 @@
     background-color: #33CCCC;
   }
   .center {
-    visibility: hidden;
+    background-color: #FFFFFF;
   }
 
 .indicator {
   margin-top: 20px;
   height: 150px;
   border: 1px solid;
+}
+
+.icon {
+  margin: 55px 40%;
+}
+
+#status {
+  margin-top: 25%;
+  text-align: center;
 }
