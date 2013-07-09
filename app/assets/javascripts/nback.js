@@ -3,11 +3,11 @@ window.Nback = {
   Collections: {},
   Views: {},
   Routers: {},
-  initialize: function() {
-    alert('Hello from Backbone!');
+  initialize: function($rootEl) {
+    new Nback.routers.Nbacks($rootEl);
   }
 };
 
 $(document).ready(function(){
-  Nback.initialize();
+  Nback.initialize($("#content"));
 });
