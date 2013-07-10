@@ -28,6 +28,8 @@ gem 'jquery-rails'
 
 gem 'backbone-on-rails'
 
+gem 'figaro'
+
 gem 'devise'
 
 gem 'omniauth'
