@@ -8,7 +8,8 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
 
   events: {
     "click #start": "play",
-    "click #show-stats": "displayStats"
+    "click #show-stats": "displayStats",
+    "click #close-stats": "closeStats"
   },
 
   render: function () {
@@ -72,12 +73,12 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
   },
 
   _congratulate: function () {
-    var notice = "<span>You made it to the next level!</span>";
+    var notice = "<div>You made it to the next level!</div>";
     $(this.$el.find("#status")).append(notice);
   },
 
   _fail: function () {
-    var notice = "<span>You missed too many! Try again</span>";
+    var notice = "<div>You missed too many! Try again</div>";
     $(this.$el.find("#status")).append(notice);
   },
 
@@ -123,6 +124,11 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
       model: this.game
     });
     $(this.$el.find("#stats")).html(statsView.render().$el);
+    $(this.$el.find("#stats")).show("slow");
+  },
+
+  closeStats: function () {
+    $(this.$el.find("#stats")).hide("slow");
   }
 
 });
