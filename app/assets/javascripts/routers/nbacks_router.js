@@ -4,6 +4,7 @@ Nback.Routers.Nbacks = Backbone.Router.extend({
   },
 
   routes: {
+    "_=_": "index",
     "": "index",
     "instructions": "instructions"
   },

@@ -13,18 +13,159 @@
         <a class="brand" href="#">a<strong>N</strong>imal-Back</a>
         <ul class="nav">
           <li id="game-tab"><a href="#">The Game</a></li>
+          <li class="divider-vertical"></li>
           <li id="instructions-tab"><a href="#/instructions">Instructions</a></li>
+          <li class="divider-vertical"></li>
+
+          <% if user_signed_in? %>
+            <li>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <%= current_user.name %>
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu pull-right">
+                <li><%= link_to "Log Out",
+                  destroy_user_session_url,
+                  :method => :delete %>
+                </li>
+              </ul>
+            </li>
+          <% else %>
+            <li><a data-toggle="modal" href="#auth">Sign In</a></li>
+            <li class="divider-vertical"></li>
+            <li><a data-toggle="modal" href="#sign-up">Sign Up</a></li>
+          <% end %>
+
         </ul>
       </div>
     </div>
   </div>
 
-  <div id="alerts" class="row-fluid span12">
-   <%= notice %><%= alert %>
-   <!-- not sure if htis works -->
-  </div>
+  <% if (flash[:notice] || flash[:alert]) %>
+    <div id="alerts" class="alert row-fluid">
+     <%= flash[:notice] %><%= flash[:alert] %>
+    </div>
+  <% end%>
 
 <%= yield %>
+
+
+<div id="auth" class="modal hide fade text-center" tabindex="-1"
+  role="form" aria-labelledby="auth-choices" aria-hidden="true">
+
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+      x
+    </button>
+    <h3 id="auth-header">Sign In</h3>
+  </div>
+
+  <div class="modal-body">
+      <%= link_to "Sign in with Facebook",
+        user_omniauth_authorize_path(:facebook),
+        :class => "btn btn-success fb-login"%>
+
+    <h4>Or</h4>
+
+    <div class="auth-form">
+      <form accept-charset="UTF-8" action="/users/sign_in" class="new_user" id="new_user" method="post">
+        <div style="margin:0;padding:0;display:inline">
+          <input name="utf8" type="hidden" value="✓">
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+        </div>
+        <div>
+          <label for="user_email">Email</label>
+          <input autofocus="autofocus" id="user_email"
+            name="user[email]" size="30" type="email" value="">
+        </div>
+
+        <div>
+          <label for="user_password">Password</label>
+          <input id="user_password" name="user[password]"
+            size="30" type="password">
+        </div>
+
+          <div>
+            <input name="user[remember_me]" type="hidden" value="0">
+            <input id="user_remember_me" name="user[remember_me]"
+              type="checkbox" value="1">
+            <label for="user_remember_me">Remember me</label>
+          </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+      <div>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <input type="submit" class="btn btn-primary" value="Sign In">
+      </div>
+    </form>
+  </div>
+
+</div>
+
+
+<div id="sign-up" class="modal hide fade text-center" tabindex="-1"
+  role="form" aria-labelledby="auth-choices" aria-hidden="true">
+
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+      x
+    </button>
+    <h3 id="auth-header">Sign Up</h3>
+  </div>
+
+  <div class="modal-body">
+    <%= link_to "Sign in with Facebook",
+      user_omniauth_authorize_path(:facebook),
+      :class => "btn btn-success fb-login"%>
+
+    <h4>Or</h4>
+
+    <div class="auth-form">
+      <form accept-charset="UTF-8" action="/users"
+        class="new_user" id="new_user" method="post">
+        <div style="margin:0;padding:0;display:inline">
+          <input name="utf8" type="hidden" value="✓">
+          <input name="authenticity_token" type="hidden"
+          value="<%= form_authenticity_token %>">
+        </div>
+
+        <div>
+          <label for="user_name">Name</label>
+          <input autofocus="autofocus" id="user_name"
+            name="user[name]" size="30" type="text" value="">
+        </div>
+
+        <div>
+          <label for="user_email">Email</label>
+          <input autofocus="autofocus" id="user_email"
+            name="user[email]" size="30" type="email" value="">
+        </div>
+
+        <div>
+          <label for="user_password">Password</label>
+          <input id="user_password" name="user[password]"
+            size="30" type="password">
+        </div>
+        <div>
+          <label for="user_password_confirmation">Password confirmation</label>
+          <input id="user_password_confirmation"
+            name="user[password_confirmation]" size="30" type="password">
+        </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+      <div>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <input type="submit" class="btn btn-primary" value="Sign Up">
+      </div>
+    </form>
+  </div>
+
+</div>
+
 
 </body>
 </html>
