@@ -61,6 +61,7 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
             self._fail();
           }
           self._statsLink();
+          self._updateStats();
         }
       }, 30)
 
@@ -120,15 +121,18 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
   },
 
   displayStats: function () {
+    $(this.$el.find("#stats")).show("slow");
+  },
+
+  _updateStats: function () {
     var statsView = new Nback.Views.NbacksStats({
       model: this.game
     });
     $(this.$el.find("#stats")).html(statsView.render().$el);
-    $(this.$el.find("#stats")).show("slow");
   },
 
   closeStats: function () {
     $(this.$el.find("#stats")).hide("slow");
-  }
+  },
 
 });
