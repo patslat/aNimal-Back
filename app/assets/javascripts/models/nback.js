@@ -4,6 +4,8 @@ Nback.Models.Nback = Backbone.Model.extend({
     this.n = 1;
     this.sequences = [];
     this.currentResponse = [false, false];
+    // accuracy is an array of pairs of booleans
+    // representing [visual correct?, auditory correct?]
     this.accuracy = [];
   },
 
@@ -30,33 +32,60 @@ Nback.Models.Nback = Backbone.Model.extend({
     var correct = this._getCorrectInput(i);
     var response = this.currentResponse;
 
-    // console.log("END OF PASS THIS IS THE CORRECT")
-    // console.log(correct)
-    // console.log("this is what you said")
-    // console.log(response)
-
     this.accuracy.push(
-      (correct[0] === response[0]) && (correct[1] === response[1])
+      [correct[0] === response[0], correct[1] === response[1]]
     )
 
     this.currentResponse = [false, false]
   },
 
   wonRound: function () {
-    // console.log("END OF ROUND THIS IS THE ACCURACY")
-    // console.log(this.getAccuracy())
-    // console.log("by pass")
-    // console.log(this.accuracy)
     return (this.getAccuracy() > .8);
   },
 
   getAccuracy: function () {
-    var accuracy =
-      _(this.accuracy).select(function (acc) {
-        if (acc) return acc;
-      }).length;
-
+    var accuracy = this.overallCorrect();
     return (accuracy / this.sequences.length);
+  },
+
+  overallCorrect: function () {
+    var correctCount =
+      _(this.accuracy).select(function (acc) {
+        // count as correct if both visual and auditory are true
+        if (acc[0] && acc[1]) return acc;
+      }).length;
+    return correctCount;
+  },
+
+  overallMiss: function () {
+    var missCount = (this.sequences.length - this.overallCorrect());
+    return missCount;
+  },
+
+  visualCorrect: function () {
+    var correctCount =
+      _(this.accuracy).select(function (acc) {
+        if (acc[0]) return acc;
+      }).length;
+    return correctCount;
+  },
+
+  visualMiss: function () {
+    var missCount = (this.sequences.length - this.visualCorrect());
+    return missCount;
+  },
+
+  auditoryCorrect: function () {
+    var correctCount =
+      _(this.accuracy).select(function (acc) {
+        if (acc[1]) return acc;
+      }).length;
+    return correctCount;
+  },
+
+  auditoryMiss: function () {
+    var missCount = (this.sequences.length - this.auditoryCorrect());
+    return missCount;
   },
 
   _getCorrectInput: function (i) {
@@ -73,8 +102,6 @@ Nback.Models.Nback = Backbone.Model.extend({
     } else {
       return [false, false];
     }
-
-
   }
 
 });

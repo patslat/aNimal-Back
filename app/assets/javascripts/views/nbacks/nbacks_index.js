@@ -7,7 +7,8 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
   template: JST['nbacks/index'],
 
   events: {
-    "click #start": "play"
+    "click #start": "play",
+    "click #show-stats": "displayStats"
   },
 
   render: function () {
@@ -33,12 +34,12 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
       setTimeout(function () {
         $.playSound("sounds/" + sound + ".mp3");
         $("#block-" + block).toggleClass("light");
-      }, 1000)
+      }, 10)
 
       // light and sound off
       setTimeout(function () {
         $("#block-" + block).toggleClass("light");
-      }, 2000)
+      }, 20)
 
       // time where input still allowed
       setTimeout(function () {
@@ -52,26 +53,37 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
           if (self.game.wonRound()) {
             self.game.n += 1;
             self._renderStatus();
+            self._congratulate();
           } else {
             self.game.n = 1;
             self._renderStatus();
+            self._fail();
           }
-          self._showAccuracy();
+          self._statsLink();
         }
-      }, 3000)
+      }, 30)
 
     })(this.game.sequences.length);
   },
 
   _renderStatus: function () {
-    var status = "<h1>N = " + this.game.n + "</h1>";
+    var status = "<h2>N = " + this.game.n + "</h2>";
     $(this.$el.find("#status")).html(status);
   },
 
-  _showAccuracy: function () {
-    var accuracy = "<span>Accuracy Last Round: " +
-      this.game.getAccuracy() + "</span>";
-    $(this.$el.find("#status")).append(accuracy);
+  _congratulate: function () {
+    var notice = "<span>You made it to the next level!</span>";
+    $(this.$el.find("#status")).append(notice);
+  },
+
+  _fail: function () {
+    var notice = "<span>You missed too many! Try again</span>";
+    $(this.$el.find("#status")).append(notice);
+  },
+
+  _statsLink: function () {
+    var btn = '<button id="show-stats" class="btn">See Stats</button>'
+    $(this.$el.find("#status")).append(btn);
   },
 
   _bindInputs: function () {
@@ -105,5 +117,12 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
       $el.toggleClass("light")
     }, 200);
   },
+
+  displayStats: function () {
+    var statsView = new Nback.Views.NbacksStats({
+      model: this.game
+    });
+    $(this.$el.find("#stats")).html(statsView.render().$el);
+  }
 
 });

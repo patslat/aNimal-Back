@@ -1,0 +1,25 @@
+<div id="stats-data" class="fluid-container">
+  <div class="fluid-row">
+    <h3>Stats</h3>
+  </div>
+
+  <div id="overall-stats" class="span3">
+    Correct: <%= this.model.overallCorrect() %>
+    <br>
+    Miss: <%= this.model.overallMiss() %>
+  </div>
+  <div id="visual-stats"class="span3">
+    Correct: <%= this.model.visualCorrect() %>
+    <br>
+    Miss: <%= this.model.visualMiss() %>
+  </div>
+  <div id="auditory-stats" class="span3">
+    Correct: <%= this.model.auditoryCorrect() %>
+    <br>
+    Miss: <%= this.model.visualMiss() %>
+  </div>
+
+  <div class="fluid-row">
+    <button id="close-stats" class="btn">Close</button>
+  </div>
+</div>
