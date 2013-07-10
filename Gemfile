@@ -7,6 +7,10 @@ gem 'rails', '3.2.13'
 
 gem 'sqlite3'
 
+group :development do
+  gem 'letter_opener'
+end
+
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -23,6 +27,13 @@ end
 gem 'jquery-rails'
 
 gem 'backbone-on-rails'
+
+gem 'devise'
+
+gem 'omniauth'
+gem 'omniauth-google'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

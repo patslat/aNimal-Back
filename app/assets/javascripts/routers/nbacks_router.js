@@ -9,11 +9,15 @@ Nback.Routers.Nbacks = Backbone.Router.extend({
   },
 
   index: function () {
+    $(".nav").find("li").removeClass("active")
+    $(".nav").find("#game-tab").addClass("active")
     var view = new Nback.Views.NbacksIndex();
     this.$rootEl.html(view.render().$el);
   },
 
   instructions: function () {
+    $(".nav").find("li").removeClass("active")
+    $(".nav").find("#instructions-tab").addClass("active")
     var view = new Nback.Views.NbacksInstructions();
     this.$rootEl.html(view.render().$el);
   }
