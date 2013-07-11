@@ -7,7 +7,7 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
   template: JST['nbacks/index'],
 
   events: {
-    "click #start": "play",
+    "click .start": "play",
     "click #show-stats": "displayStats",
     "click #close-stats": "closeStats"
   },
@@ -53,18 +53,20 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
           gameLoop(i)
         } else {
           if (self.game.wonRound()) {
+            self._uploadStats();
             self.game.n += 1;
             self._renderStatus();
             self._congratulate();
           } else {
+            self._uploadStats();
             self.game.n = 1;
             self._renderStatus();
             self._fail();
           }
           self._statsLink();
           self._updateStats();
-          self._uploadStats();
           self._togglePlay();
+          if (!current_user) self._requestSignIn();
         }
       }, 30)
 
@@ -148,7 +150,14 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
   },
 
   _togglePlay: function () {
-    $("#start").toggleClass('disabled');
+    $("#start").toggleClass('start').toggleClass("disabled");
+  },
+
+  _requestSignIn: function () {
+    $("#alert-window")
+      .html(
+      $('<div class="alert">Sign in to track your stats!</div>')
+      .delay(2000).fadeOut("slow"))
   }
 
 });

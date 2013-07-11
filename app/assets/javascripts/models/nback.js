@@ -40,7 +40,7 @@ Nback.Models.Nback = Backbone.Model.extend({
   },
 
   wonRound: function () {
-    return (this.getAccuracy() > .8);
+    return (this.getAccuracy() > .75);
   },
 
   getStats: function () {

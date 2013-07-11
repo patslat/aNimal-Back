@@ -10,7 +10,7 @@ class GamesController < ApplicationController
   end
 
   def index
-    @data = Game.to_csv # fix so it doesn't reply with all games
+    @data = current_user.games.to_csv # fix so it doesn't reply with all games
     respond_to do |format|
       format.csv { render :text => @data }
     end

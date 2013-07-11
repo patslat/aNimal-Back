@@ -66,3 +66,6 @@
   overflow: scroll;
 }
 
+#alert-window {
+  position: absolute;
+}

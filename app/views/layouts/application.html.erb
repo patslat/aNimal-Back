@@ -43,11 +43,13 @@
     </div>
   </div>
 
+  <div id="alert-window">
   <% if (flash[:notice] || flash[:alert]) %>
-    <div id="alerts" class="alert row-fluid">
-     <%= flash[:notice] %><%= flash[:alert] %>
+    <div id="alerts" class="alert">
+      <%= flash[:notice] %><%= flash[:alert] %>
     </div>
   <% end%>
+  </div>
 
 <%= yield %>
 
@@ -98,7 +100,7 @@
 
   <div class="modal-footer">
       <div>
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <a class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
         <input type="submit" class="btn btn-primary" value="Sign In">
       </div>
     </form>
@@ -160,7 +162,7 @@
 
   <div class="modal-footer">
       <div>
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <a class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
         <input type="submit" class="btn btn-primary" value="Sign Up">
       </div>
     </form>
@@ -168,6 +170,8 @@
 
 </div>
 
-
+<script id="current" type="text/javascript">
+  var current_user = <%= current_user.to_json.html_safe %>
+</script>
 </body>
 </html>

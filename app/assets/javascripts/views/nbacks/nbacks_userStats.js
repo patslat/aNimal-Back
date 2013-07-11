@@ -56,9 +56,9 @@ Nback.Views.UserStats = Backbone.View.extend({
 
       x0.domain(data.map(function(d) { return d.id; }));
 
-      x1.domain(performanceMeasures).rangeRoundBands([0, 20]);
+      x1.domain(performanceMeasures).rangeRoundBands([0, x0.rangeBand()]);
 
-      y.domain([0, 30]);
+      y.domain([0, 25]);
 
       svg.append("g")
           .attr("class", "x axis")
@@ -69,7 +69,7 @@ Nback.Views.UserStats = Backbone.View.extend({
           .attr("y", 100)
           .attr("x", 400)
           .style("text-anchor", "end")
-          .text("Games Played")
+          .text("Games Played \u2192")
 
 
       svg.append("g")
@@ -87,7 +87,7 @@ Nback.Views.UserStats = Backbone.View.extend({
           .data(data)
         .enter().append("g")
           .attr("class", "g")
-          .attr("transform", function(d) { return "translate(" + x0(d.id) + ",0)"; });
+          .attr("transform", function(d) {return "translate(" + x0(d.id) + ",0)"; });
 
       game.selectAll("rect")
           .data(function(d) { return d.performance; })
@@ -115,7 +115,6 @@ Nback.Views.UserStats = Backbone.View.extend({
           .attr("x", 620)
           .attr("y", 9)
           .attr("dy", ".35em")
-          // .style("text-anchor", "start")
           .text(function(d) { return d; });
 
     });

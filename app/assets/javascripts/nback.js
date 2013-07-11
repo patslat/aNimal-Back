@@ -11,4 +11,5 @@ window.Nback = {
 
 $(document).ready(function(){
   Nback.initialize($("#content"));
+  $("#alerts").delay(2000).fadeOut("slow");
 });
