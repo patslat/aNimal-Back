@@ -141,10 +141,7 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
     $.ajax({
       url: "/games",
       data: stats,
-      type: "POST",
-      success: function () {
-        console.log("great success");
-      }
+      type: "POST"
     });
   },
 

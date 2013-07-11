@@ -49,7 +49,8 @@ Nback.Models.Nback = Backbone.Model.extend({
         overall_correct: this.overallCorrect(),
         visual_correct: this.visualCorrect(),
         auditory_correct: this.auditoryCorrect(),
-        sequences: this.sequences.length
+        sequences: this.sequences.length,
+        n: this.n
       }
     }
   },

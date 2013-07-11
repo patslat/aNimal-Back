@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
   attr_accessible :auditory_correct, :visual_correct, :overall_correct,
-    :sequences, :user_id
+    :sequences, :user_id, :n
 
   def self.to_csv
     CSV.generate do |csv|
