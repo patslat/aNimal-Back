@@ -9,7 +9,7 @@ Nback.Views.UserStats = Backbone.View.extend({
 
   buildSVG: function () {
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    var margin = {top: 20, right: 20, bottom: 150, left: 150},
         width = 960 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
@@ -38,7 +38,6 @@ Nback.Views.UserStats = Backbone.View.extend({
         .attr("height", height + margin.top + margin.bottom)
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-        console.log(svg)
 
     d3.csv("games.csv", function(error, data) {
 
@@ -57,26 +56,32 @@ Nback.Views.UserStats = Backbone.View.extend({
 
       x0.domain(data.map(function(d) { return d.id; }));
 
+      x1.domain(performanceMeasures).rangeRoundBands([0, 20]);
 
-      x1.domain(performanceMeasures).rangeRoundBands([0, x0.rangeBand()]);
-
-      y.domain([0, 20]);
+      y.domain([0, 30]);
 
       svg.append("g")
           .attr("class", "x axis")
           .attr("transform", "translate(0," + height + ")")
-          .call(xAxis);
+          .call(xAxis)
+        .append("text")
+          .attr("font-size", 50)
+          .attr("y", 100)
+          .attr("x", 400)
+          .style("text-anchor", "end")
+          .text("Games Played")
 
 
       svg.append("g")
           .attr("class", "y axis")
           .call(yAxis)
         .append("text")
+          .attr("font-size", 50)
           .attr("transform", "rotate(-90)")
-          .attr("y", 6)
+          .attr("y", -100)
           .attr("dy", ".71em")
           .style("text-anchor", "end")
-          .text("Performance");
+          .text("Correct Answers");
 
       var game = svg.selectAll(".id")
           .data(data)
@@ -97,19 +102,20 @@ Nback.Views.UserStats = Backbone.View.extend({
           .data(performanceMeasures.slice().reverse())
         .enter().append("g")
           .attr("class", "legend")
-          .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+          .attr("transform", function(d, i) { return "translate("+ -i * 150 +",0)"; });
 
       legend.append("rect")
-          .attr("x", width - 18)
+          .attr("x", 600)
           .attr("width", 18)
           .attr("height", 18)
+          .style("anchor", "start")
           .style("fill", color);
 
       legend.append("text")
-          .attr("x", width - 24)
+          .attr("x", 620)
           .attr("y", 9)
           .attr("dy", ".35em")
-          .style("text-anchor", "end")
+          // .style("text-anchor", "start")
           .text(function(d) { return d; });
 
     });

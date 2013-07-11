@@ -12,8 +12,8 @@
  *= require_tree .
  */
 
-#body {
-  background-color: #EFEFEF;
+.container-fluid {
+  background-color: #F0F0F0;
 }
 
 .block {
@@ -21,6 +21,7 @@
   margin-top: 20px;
   background-color: #CCC;
   border: 1px solid;
+  border-radius: 3px;
 }
   .light {
     background-color: #33CCCC;
