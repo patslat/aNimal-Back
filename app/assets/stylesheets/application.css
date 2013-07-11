@@ -54,7 +54,7 @@
 }
 
 #stats {
-  position: relative;
+  margin-left:0px;
   text-align: center;
   border: 1px solid;
   border-radius: 5px;
