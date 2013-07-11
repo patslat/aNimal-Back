@@ -121,7 +121,7 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
   },
 
   displayStats: function () {
-    $(this.$el.find("#stats")).show()//.show("slow");
+    $(this.$el.find("#stats")).show("slow");
   },
 
   _updateStats: function () {
@@ -132,7 +132,7 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
   },
 
   closeStats: function () {
-    $(this.$el.find("#stats"))//.hide("slow");
+    $(this.$el.find("#stats")).hide("slow");
   },
 
 });
