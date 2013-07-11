@@ -6,21 +6,34 @@ Nback.Routers.Nbacks = Backbone.Router.extend({
   routes: {
     "_=_": "index",
     "": "index",
-    "instructions": "instructions"
+    "instructions": "instructions",
+    "stats": "stats"
   },
 
   index: function () {
-    $(".nav").find("li").removeClass("active")
-    $(".nav").find("#game-tab").addClass("active")
+    this._updateNav("#game-tab")
     var view = new Nback.Views.NbacksIndex();
     this.$rootEl.html(view.render().$el);
   },
 
   instructions: function () {
-    $(".nav").find("li").removeClass("active")
-    $(".nav").find("#instructions-tab").addClass("active")
+    this._updateNav("#instructions-tab")
     var view = new Nback.Views.NbacksInstructions();
     this.$rootEl.html(view.render().$el);
+  },
+
+  stats: function () {
+    this._updateNav("#stats-tab")
+    var view = new Nback.Views.UserStats();
+    this.$rootEl.html(view.render().$el).promise().done(function () {
+      view.buildSVG();
+    });
+
+  },
+
+  _updateNav: function (newTab) {
+    $(".nav").find("li").removeClass("active")
+    $(".nav").find(newTab).addClass("active")
   }
 
 });

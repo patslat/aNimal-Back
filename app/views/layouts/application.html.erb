@@ -19,6 +19,7 @@
           <li class="divider-vertical"></li>
 
           <% if user_signed_in? %>
+            <li id="stats-tab"><a href="#/stats">My Stats</a></li>
             <li>
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <%= current_user.name %>

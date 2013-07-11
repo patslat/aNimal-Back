@@ -4,5 +4,6 @@ Nback::Application.routes.draw do
   }
 
   root :to => "root#root"
-  resources :games, :only => [:create, :show]
+
+  resources :games, :only => [:index, :show, :create]
 end
