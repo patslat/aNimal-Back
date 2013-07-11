@@ -19,6 +19,7 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
   },
 
   play: function () {
+    this._togglePlay();
     var self = this
 
     this.game.startRound();
@@ -63,6 +64,7 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
           self._statsLink();
           self._updateStats();
           self._uploadStats();
+          self._togglePlay();
         }
       }, 30)
 
@@ -144,5 +146,9 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
       type: "POST"
     });
   },
+
+  _togglePlay: function () {
+    $("#start").toggleClass('disabled');
+  }
 
 });

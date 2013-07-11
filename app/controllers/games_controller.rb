@@ -14,7 +14,5 @@ class GamesController < ApplicationController
     respond_to do |format|
       format.csv { render :text => @data }
     end
-
-
   end
 end

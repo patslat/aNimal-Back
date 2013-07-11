@@ -2,17 +2,20 @@
     <h3 style="margin-right: 5%;">Stats</h3>
 
   <div class="row-fluid span12">
-    <div id="overall-stats" class="offset1 span3">
-      Correct: <%= this.model.overallCorrect() %>
-      <br>
-      Miss: <%= this.model.overallMiss() %>
-    </div>
-    <div id="visual-stats"class="span3">
+    <div id="visual-stats"class="offset1 span3">
+      <h4>Visual</h4>
       Correct: <%= this.model.visualCorrect() %>
       <br>
       Miss: <%= this.model.visualMiss() %>
     </div>
+    <div id="overall-stats" class="span3">
+      <h4>Overall</h4>
+      Correct: <%= this.model.overallCorrect() %>
+      <br>
+      Miss: <%= this.model.overallMiss() %>
+    </div>
     <div id="auditory-stats" class="span3">
+      <h4>Auditory</h4>
       Correct: <%= this.model.auditoryCorrect() %>
       <br>
       Miss: <%= this.model.visualMiss() %>
