@@ -43,6 +43,17 @@ Nback.Models.Nback = Backbone.Model.extend({
     return (this.getAccuracy() > .8);
   },
 
+  getStats: function () {
+    return {
+      game: {
+        overall_correct: this.overallCorrect(),
+        visual_correct: this.visualCorrect(),
+        auditory_correct: this.auditoryCorrect(),
+        sequences: this.sequences.length
+      }
+    }
+  },
+
   getAccuracy: function () {
     var accuracy = this.overallCorrect();
     return (accuracy / this.sequences.length);

@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   # for oauth
   attr_accessible :provider, :uid
 
+  has_many :games
+
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
@@ -27,10 +29,12 @@ class User < ActiveRecord::Base
   end
 
   def self.new_with_session(params, session)
-      super.tap do |user|
-        if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-          user.email = data["email"] if user.email.blank?
-        end
+    super.tap do |user|
+      if data = session["devise.facebook_data"] &&
+          session["devise.facebook_data"]["extra"]["raw_info"]
+
+        user.email = data["email"] if user.email.blank?
       end
     end
+  end
 end
