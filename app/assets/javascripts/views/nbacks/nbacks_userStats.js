@@ -9,7 +9,7 @@ Nback.Views.UserStats = Backbone.View.extend({
 
   buildSVG: function () {
 
-    var margin = {top: 20, right: 20, bottom: 150, left: 150},
+    var margin = {top: 60, right: 20, bottom: 150, left: 150},
         width = 960 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
@@ -22,7 +22,7 @@ Nback.Views.UserStats = Backbone.View.extend({
         .range([height, 0]);
 
     var color = d3.scale.ordinal()
-        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+        .range(["#FF8E59", "#6469FF", "#77CC57", "#FF0009", "#a05d56", "#d0743c", "#ff8c00"]);
 
     var xAxis = d3.svg.axis()
         .scale(x0)
@@ -106,16 +106,18 @@ Nback.Views.UserStats = Backbone.View.extend({
 
       legend.append("rect")
           .attr("x", 600)
+          .attr("y", -40)
           .attr("width", 18)
           .attr("height", 18)
+          .attr("id", "legend")
           .style("anchor", "start")
           .style("fill", color);
 
       legend.append("text")
           .attr("x", 620)
-          .attr("y", 9)
+          .attr("y", -30)
           .attr("dy", ".35em")
-          .text(function(d) { return d; });
+          .text(function(d) { return d.replace(/_/, " "); });
 
     });
   }
