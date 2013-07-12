@@ -37,12 +37,12 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
       setTimeout(function () {
         $("#sound-" + sound)[0].play()
         $("#block-" + block).toggleClass("light");
-      }, 10)
+      }, 1000)
 
       // light and sound off
       setTimeout(function () {
         $("#block-" + block).toggleClass("light");
-      }, 20)
+      }, 2000)
 
       // time where input still allowed
       setTimeout(function () {
@@ -69,7 +69,7 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
           self._togglePlay();
           if (!current_user) self._requestSignIn();
         }
-      }, 30)
+      }, 3000)
 
     })(this.game.sequences.length);
   },

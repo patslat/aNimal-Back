@@ -109,7 +109,6 @@ Nback.Views.UserStats = Backbone.View.extend({
           .attr("y", -40)
           .attr("width", 18)
           .attr("height", 18)
-          .attr("id", "legend")
           .style("anchor", "start")
           .style("fill", color);
 
