@@ -69,3 +69,8 @@
 #alert-window {
   position: absolute;
 }
+
+.reminders {
+  padding-top: 10px;
+  text-align: center;
+}
