@@ -167,11 +167,16 @@
       </div>
     </form>
   </div>
-
 </div>
+
+<% ["a", "b", "c", "d", "e", "f"].each do |sound| %>
+  <audio id="sound-<%= sound %>" src="<%='sounds/' + sound + '.mp3' %>" type="audio/mp3"></audio>
+<% end %>
 
 <script id="current" type="text/javascript">
   var current_user = <%= current_user.to_json.html_safe %>
 </script>
+
+
 </body>
 </html>
