@@ -165,11 +165,14 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
   _instructionPrompt: function () {
     if (!this.prompted) {
       this.prompted = true;
-      $("#alert-window")
-        .html(
-          $('<div class="alert">Click instructions if you\'ve never played before!</div>')
-            .delay(2000).fadeOut("slow")
-        );
+      var $instructions = $('#instructions-tab');
+      $instructions.tooltip({
+        placement: 'bottom',
+        title: 'Check out the instructions if you\'ve never played before!',
+        trigger: 'manual',
+        delay: 2000
+      }).tooltip('show')
+      setTimeout(function () { $instructions.tooltip('hide') }, 2000 );
     }
   }
 
