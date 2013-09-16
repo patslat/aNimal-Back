@@ -1,7 +1,8 @@
 Nback.Views.NbacksIndex = Backbone.View.extend({
 
-  initialize: function () {
+  initialize: function (options) {
     this.game = new Nback.Models.Nback();
+    this.prompted = options.prompted;
   },
 
   template: JST['nbacks/index'],
@@ -14,6 +15,7 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
 
   render: function () {
     this.$el.html(this.template());
+    this._instructionPrompt();
     this._renderStatus();
     return this;
   },
@@ -103,7 +105,6 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
     $(document).off('keypress', this._registerResponse);
   },
 
-
   _registerResponse: function (event) {
     this._giveFeedback(event.keyCode);
   },
@@ -159,6 +160,17 @@ Nback.Views.NbacksIndex = Backbone.View.extend({
       .html(
       $('<div class="alert">Sign in to track your stats!</div>')
       .delay(2000).fadeOut("slow"))
+  },
+
+  _instructionPrompt: function () {
+    if (!this.prompted) {
+      this.prompted = true;
+      $("#alert-window")
+        .html(
+          $('<div class="alert">Click instructions if you\'ve never played before!</div>')
+            .delay(2000).fadeOut("slow")
+        );
+    }
   }
 
 });

@@ -12,7 +12,8 @@ Nback.Routers.Nbacks = Backbone.Router.extend({
 
   index: function () {
     this._updateNav("#game-tab")
-    var view = new Nback.Views.NbacksIndex();
+    var view = new Nback.Views.NbacksIndex({ prompted: this.prompted });
+    this.prompted = true;
     this.$rootEl.html(view.render().$el);
   },
 
