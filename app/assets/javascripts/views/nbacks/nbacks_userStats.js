@@ -102,10 +102,10 @@ Nback.Views.UserStats = Backbone.View.extend({
           .data(performanceMeasures.slice().reverse())
         .enter().append("g")
           .attr("class", "legend")
-          .attr("transform", function(d, i) { return "translate("+ -i * 150 +",0)"; });
+          .attr("transform", function(d, i) { return "translate("+ -i * 80 +",0)"; });
 
       legend.append("rect")
-          .attr("x", 600)
+          .attr("x", 400)
           .attr("y", -40)
           .attr("width", 18)
           .attr("height", 18)
@@ -113,10 +113,10 @@ Nback.Views.UserStats = Backbone.View.extend({
           .style("fill", color);
 
       legend.append("text")
-          .attr("x", 620)
+          .attr("x", 420)
           .attr("y", -30)
           .attr("dy", ".35em")
-          .text(function(d) { return d.replace(/_/, " "); });
+          .text(function(d) { return d.replace(/_correct/, ""); });
 
     });
   }
